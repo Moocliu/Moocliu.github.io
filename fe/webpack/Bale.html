@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>webpack3.0 基本项目打包流程 | 暖男笔记</title>
+    <meta name="description" content=",前端,笔记">
+    <link rel="icon" type="image/png" href="/favicon.png">
+  <meta name="baidu-site-verification" content="TSXvc1KyeR">
+    
+    <link rel="preload" href="/assets/css/0.styles.3d76951f.css" as="style"><link rel="preload" href="/assets/js/app.893cec24.js" as="script"><link rel="preload" href="/assets/js/26.f1da6f0b.js" as="script"><link rel="prefetch" href="/assets/js/13.55459c2b.js"><link rel="prefetch" href="/assets/js/2.2dec0700.js"><link rel="prefetch" href="/assets/js/3.a65c558f.js"><link rel="prefetch" href="/assets/js/4.45a131f2.js"><link rel="prefetch" href="/assets/js/5.2255bf0c.js"><link rel="prefetch" href="/assets/js/6.5dee0fb2.js"><link rel="prefetch" href="/assets/js/7.7a1a0e6f.js"><link rel="prefetch" href="/assets/js/8.5fbaf1d7.js"><link rel="prefetch" href="/assets/js/9.25bb6c34.js"><link rel="prefetch" href="/assets/js/10.ba411b85.js"><link rel="prefetch" href="/assets/js/11.cebe0501.js"><link rel="prefetch" href="/assets/js/12.2d489106.js"><link rel="prefetch" href="/assets/js/14.c84a071b.js"><link rel="prefetch" href="/assets/js/15.d5e13fda.js"><link rel="prefetch" href="/assets/js/16.ba423b42.js"><link rel="prefetch" href="/assets/js/17.37b81a37.js"><link rel="prefetch" href="/assets/js/18.99c95b1b.js"><link rel="prefetch" href="/assets/js/19.8261c0b9.js"><link rel="prefetch" href="/assets/js/20.90ec8376.js"><link rel="prefetch" href="/assets/js/21.cd970379.js"><link rel="prefetch" href="/assets/js/22.8d972c81.js"><link rel="prefetch" href="/assets/js/23.e42945e1.js"><link rel="prefetch" href="/assets/js/24.7917307d.js"><link rel="prefetch" href="/assets/js/25.47498463.js"><link rel="prefetch" href="/assets/js/27.57d087eb.js"><link rel="prefetch" href="/assets/js/28.84cb2ed8.js"><link rel="prefetch" href="/assets/js/29.5cd85c00.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3d76951f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="暖男笔记" class="logo can-hide"> <span class="site-name">暖男笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/fe/" class="nav-link router-link-active">前端笔记</a></div><div class="nav-item"><a href="/resource/" class="nav-link">前端资源</a></div><div class="nav-item"><a href="/live/" class="nav-link">记录生活</a></div><div class="nav-item"><a href="https://github.com/Moocliu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/5a3902106fb9a0452936e2c3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  社区
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/fe/" class="nav-link router-link-active">前端笔记</a></div><div class="nav-item"><a href="/resource/" class="nav-link">前端资源</a></div><div class="nav-item"><a href="/live/" class="nav-link">记录生活</a></div><div class="nav-item"><a href="https://github.com/Moocliu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/5a3902106fb9a0452936e2c3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  社区
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <!----> </div> <div class="page"> <div class="page-detail"><div class="container"><div class="page-detail-content"><div class="title">webpack3.0 基本项目打包流程</div> <div class="content custom"><h4 id="_1-配置环境-初始化项目目录"><a href="#_1-配置环境-初始化项目目录" aria-hidden="true" class="header-anchor">#</a> 1.配置环境,初始化项目目录</h4> <p>（1）.新建一个目录，再进入项目根目录执行 npm init 来初始化最简单的采用了模块化开发的项目；
+注意:可能node_moudles文件包存在问题使用其他文件包</p> <p><strong>(2).安装 Webpack//全局安装</strong></p> <div class="language-js line-numbers-mode"><pre class="language-js"><code>npm install <span class="token operator">-</span>g webpack
+<span class="token comment">//安装到你的项目目录</span>
+npm install <span class="token operator">--</span>save<span class="token operator">-</span>dev webpack
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="_2-引入其他模块步骤："><a href="#_2-引入其他模块步骤：" aria-hidden="true" class="header-anchor">#</a> 2.引入其他模块步骤：</h4> <p>在进行引入模块后每次打包使：有了这个配置之后，再打包文件，<strong>==只需在终端里运行webpack==(非全局安装需使用==node_modules/.bin/webpack==)命令就可以了</strong>，这条命令会自动引用webpack.config.js文件中的配置选项</p> <p>例如：node_modules/.bin/webpack main.js ./dist/bundle.js</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>注意：命令使用时，要结合当前项目的目录结构进行路径打包，避免错误路径发生
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>但是为了命令更加方便，再次进行配置</p> <blockquote><p><strong>更快捷的执行打包任务（npm start）</strong></p> <p>在命令行中输入命令需要代码类似于node_modules/.bin/webpack这样的路径其实是比较烦人的，不过值得庆幸的是npm可以引导任务执行，对npm进行配置后可以在命令行中使用简单的npm start命令来替代上面略微繁琐的命令。在package.json中对scripts对象进行相关设置即可，设置方法如下。</p></blockquote> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token punctuation">{</span>
+  <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;webpack-sample-project&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;version&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;1.0.0&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;description&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Sample webpack project&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;scripts&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;start&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;webpack&quot;</span> <span class="token comment">// 修改的是这里，JSON文件不支持注释，引用时请清除</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;author&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;zhang&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;license&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;ISC&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;devDependencies&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;3.10.0&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><strong>1.创建入口文件</strong>
+例如创建mian.js文件：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./main.css'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 通过 CommonJS 规范导入 show 函数</span>
+<span class="token keyword">const</span> show <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./show.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 执行 show 函数</span>
+<span class="token function">show</span><span class="token punctuation">(</span><span class="token string">'Webpack'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>2.引入.css文件</strong>
+}</p> <p>Webpack 把一切文件看作模块，CSS 文件也不例外，要引入  main.css  需要像引入 JavaScript 文件那样，修改入口文件  main.js  如下：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 通过 CommonJS 规范导入 CSS 模块</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./main.css'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>在webpack.config.js文件中的配置使用loader</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code>  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token comment">// 用正则去匹配要用该 loader 转换的 CSS 文件</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token string">'css-loader?minimize'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>注意：添加完成后打包可能出现错提示为依赖包没有找到，要手动添加依赖包（npm install css-loader 等等）</p> <p><strong>3.引入输出文件</strong>
+在相关的.html文件引入输出的js文件</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">&quot;./dist/main1.js&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>4.关于多入口，多出口</strong></p> <p>多入口，多出口的好处（为什么）：</p> <p>基本配置：
+1，创建多入口文件（比如main.js,main1.js）
+2.在webpack.config.js文件中的配置：
+多入口文件配置：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports<span class="token operator">=</span><span class="token punctuation">{</span>
+    <span class="token comment">//入口文件的配置项</span>
+    entry<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        entry<span class="token punctuation">:</span><span class="token string">'./src/entry.js'</span><span class="token punctuation">,</span>
+        <span class="token comment">//这里我们又引入了一个入口文件</span>
+        entry2<span class="token punctuation">:</span><span class="token string">'./src/entry2.js'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">//出口文件的配置项</span>
+    output<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token comment">//输出的路径，用了Node语法</span>
+        path<span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token comment">//输出的文件名称</span>
+        filename<span class="token punctuation">:</span><span class="token string">'[name].js'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">//模块：例如解读CSS,图片如何转换，压缩</span>
+    module<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">//插件，用于生产模版和各项功能</span>
+    plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">//配置webpack开发服务功能</span>
+    devServer<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><p>在入口文件中，新增了一个entry.js的入口文件，这个文件需要手动建立，出口文件的filename，我们把原来的bundle.js修改成了[name].js</p> <p>[name]的意思是根据入口文件的名称，打包成相同的名称，有几个入口文件，就可以打包出几个文件。</p> <p>3.在相关的.html文件添加输出文件（例如：script src=&quot;./dist/main1.js&quot;&gt;）</p> <h4 id="_5-不懂配置插件-plugins"><a href="#_5-不懂配置插件-plugins" aria-hidden="true" class="header-anchor">#</a> 5.不懂配置插件 plugins</h4> <p>plugins：
+1:可以将一些文件从树丛文件抽离出来，比如讲（.css文件，图片等抽离出来）；</p> <p>1.css分离
+我们知道webpack的理念就是把所有的东西都打包到js文件中，包括css、图片呀等等，是减少http请求，但是
+，但劣势也很明显，就是随着项目越来越大，js文件也会越来越大，所以，我们就需要对css文件进行分离
+好处：css分离，其实就是将css单独打包，做法很简单，就是需要一个插件，extract-text-webapck-plugin@next (注意：加@next是现阶段必须要加的（前提是你使用的webpack是4.0版本及以上的，如果你使用的是3版本及以前的版本的话不需要加@next)</p> <blockquote><p>== 目前如果不加，插件版本太低，会报错==</p></blockquote> <p>1.npm i extract-text-webpack-plugin@next -D</p> <p>2.在配置文件webpack.config.js中引入 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+//需要什么插件先在npm库中下载，后通过require引入</p> <p>6.使用scss</p> <p>步骤：
+1.创建.scss文件 在里面书写相关代码
+2.在webpack。confing.js配置相关代码：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code> rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token comment">// 增加对 SCSS 文件的支持</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.scss/</span><span class="token punctuation">,</span>
+        <span class="token comment">// SCSS 文件的处理顺序为先 sass-loader 再 css-loader 再 style-loader</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token string">'css-loader'</span><span class="token punctuation">,</span> <span class="token string">'sass-loader'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>3.在相关入口(.js)文件引入（require（&quot;.scss&quot;））;
+4.添加安装依赖文件：</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code># 安装 Webpack Loader 依赖
+npm i <span class="token operator">-</span><span class="token constant">D</span>  sass<span class="token operator">-</span>loader css<span class="token operator">-</span>loader style<span class="token operator">-</span>loader
+# sass<span class="token operator">-</span>loader 依赖 node<span class="token operator">-</span>sass
+npm i <span class="token operator">-</span><span class="token constant">D</span> node<span class="token operator">-</span>sass
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>以上配置通过正则 /.scss/ 匹配所有以 .scss 为后缀的 SCSS 文件，再分别使用3个 Loader 去处理。具体处理流程如下：</p> <blockquote><ol><li>通过 sass-loader 把 SCSS 源码转换为 CSS 代码，再把 CSS 代码交给 css-loader 去处理。</li> <li>css-loader 会找出 CSS 代码中的 @import 和 url() 这样的导入语句，告诉 Webpack 依赖这些资源。同时还支持 CSS Modules、压缩 CSS 等功能。处理完后再把结果交给 style-loader 去处理。</li> <li>style-loader 会把 CSS 代码转换成字符串后，注入到 JavaScript 代码中去，通过 JavaScript 去给 DOM 增加样式。如果你想把 CSS 代码提取到一个单独的文件而不是和 JavaScript 混在一起，可以使用1-5 使用Plugin 中介绍过的 ExtractTextPlugin。</li></ol></blockquote> <h3 id="_9-10-总结"><a href="#_9-10-总结" aria-hidden="true" class="header-anchor">#</a> 9-10 总结</h3> <p>从前面的配置看来选项很多，Webpack 内置了很多功能。 你不必都记住它们，只需要大概明白 Webpack 原理和核心概念去判断选项大致属于哪个大模块下，再去查详细的使用文档。</p> <p>通常你可用如下经验去判断如何配置 Webpack：</p> <ul><li>想让源文件加入到构建流程中去被 Webpack 控制，配置 entry。</li> <li>想自定义输出文件的位置和名称，配置 output。</li> <li>想自定义寻找依赖模块时的策略，配置 resolve。</li> <li>想自定义解析和转换文件的策略，配置 module，通常是配置 module.rules 里的 Loader。</li> <li>其它的大部分需求可能要通过 <strong>Plugin</strong> 去实现，配置 plugin。</li></ul></div></div> <div class="d-page-right"><img src="/assets/img/home-logo.dbc9eeba.png" class="home_img"> <div class="my_name"><h2>暖男小冰</h2> <span class="label">前端小码农</span></div> <div class="classification"><a href="../../fe/index.html"><span>随记:40</span></a> <a href="../../fe/class.html"><span>分类:15</span></a> <a href="../../fe/Lable/index.html"><span>标签:15</span></a></div></div></div> <div class="d-footer"><div><span> 站点总访客数：1981  站点总访问量：3402</span></div> <span> Copyright © 2018 <a href="https://github.com/Moocliu">暖男小冰</a></span></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/26.f1da6f0b.js" defer></script><script src="/assets/js/app.893cec24.js" defer></script>
+  </body>
+</html>

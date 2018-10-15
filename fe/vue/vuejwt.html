@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>最近的一个vue小项目需要node服务端做一个用户登录的校验以及权限拦截（用户认证与授权），目前常用的有两种----JWT和Session | 暖男笔记</title>
+    <meta name="description" content=",前端,笔记">
+    <link rel="icon" type="image/png" href="/favicon.png">
+  <meta name="baidu-site-verification" content="TSXvc1KyeR">
+    
+    <link rel="preload" href="/assets/css/0.styles.3d76951f.css" as="style"><link rel="preload" href="/assets/js/app.893cec24.js" as="script"><link rel="preload" href="/assets/js/24.7917307d.js" as="script"><link rel="prefetch" href="/assets/js/13.55459c2b.js"><link rel="prefetch" href="/assets/js/2.2dec0700.js"><link rel="prefetch" href="/assets/js/3.a65c558f.js"><link rel="prefetch" href="/assets/js/4.45a131f2.js"><link rel="prefetch" href="/assets/js/5.2255bf0c.js"><link rel="prefetch" href="/assets/js/6.5dee0fb2.js"><link rel="prefetch" href="/assets/js/7.7a1a0e6f.js"><link rel="prefetch" href="/assets/js/8.5fbaf1d7.js"><link rel="prefetch" href="/assets/js/9.25bb6c34.js"><link rel="prefetch" href="/assets/js/10.ba411b85.js"><link rel="prefetch" href="/assets/js/11.cebe0501.js"><link rel="prefetch" href="/assets/js/12.2d489106.js"><link rel="prefetch" href="/assets/js/14.c84a071b.js"><link rel="prefetch" href="/assets/js/15.d5e13fda.js"><link rel="prefetch" href="/assets/js/16.ba423b42.js"><link rel="prefetch" href="/assets/js/17.37b81a37.js"><link rel="prefetch" href="/assets/js/18.99c95b1b.js"><link rel="prefetch" href="/assets/js/19.8261c0b9.js"><link rel="prefetch" href="/assets/js/20.90ec8376.js"><link rel="prefetch" href="/assets/js/21.cd970379.js"><link rel="prefetch" href="/assets/js/22.8d972c81.js"><link rel="prefetch" href="/assets/js/23.e42945e1.js"><link rel="prefetch" href="/assets/js/25.47498463.js"><link rel="prefetch" href="/assets/js/26.f1da6f0b.js"><link rel="prefetch" href="/assets/js/27.57d087eb.js"><link rel="prefetch" href="/assets/js/28.84cb2ed8.js"><link rel="prefetch" href="/assets/js/29.5cd85c00.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3d76951f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="暖男笔记" class="logo can-hide"> <span class="site-name">暖男笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/fe/" class="nav-link router-link-active">前端笔记</a></div><div class="nav-item"><a href="/resource/" class="nav-link">前端资源</a></div><div class="nav-item"><a href="/live/" class="nav-link">记录生活</a></div><div class="nav-item"><a href="https://github.com/Moocliu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/5a3902106fb9a0452936e2c3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  社区
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/fe/" class="nav-link router-link-active">前端笔记</a></div><div class="nav-item"><a href="/resource/" class="nav-link">前端资源</a></div><div class="nav-item"><a href="/live/" class="nav-link">记录生活</a></div><div class="nav-item"><a href="https://github.com/Moocliu" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://juejin.im/user/5a3902106fb9a0452936e2c3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  社区
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <!----> </div> <div class="page"> <div class="page-detail"><div class="container"><div class="page-detail-content"><div class="title">最近的一个vue小项目需要node服务端做一个用户登录的校验以及权限拦截（用户认证与授权），目前常用的有两种----JWT和Session</div> <div class="content custom"><h3 id="_1-传统的session-cookie-身份验证-seesion"><a href="#_1-传统的session-cookie-身份验证-seesion" aria-hidden="true" class="header-anchor">#</a> -1.传统的session+cookie 身份验证(Seesion)</h3> <p>由于HTTP是无状态的，它并不记录用户的身份，用户将账户与密码发送到服务器后，后台通过校验，但并没有记录状态，于是下一次用户的请求仍需要校验份 为了解决这个问题需要在服务端生成一条包含用户身份的记录，也就是session，在将这条记录发送给用户存储在本地，即cookie，之后用户的请求都会带上这条cookie,若客户端的cookie与服务端的seesion都是一致的，则说明身份验证通过。</p> <h3 id="_2-token身份验证（jwt）"><a href="#_2-token身份验证（jwt）" aria-hidden="true" class="header-anchor">#</a> -2.token身份验证（JWT）</h3> <p>流程图
+<img src="https://upload-images.jianshu.io/upload_images/2047545-ce2ac0ef75f87a8c..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/552/format/webp" alt="image"></p> <p>流程大致过程：</p> <ul><li><pre><code>    第一次请求时，用户发送账户和密码
+</code></pre></li> <li><pre><code>    后台校验通过，会生成一个有效性的token,再将token发送给用户
+</code></pre></li> <li><pre><code>    用户获取到token后，存到本地的cookie或者是localstorage 中
+</code></pre></li> <li><pre><code>    之后的每次api请求都会将token添加到请求头信息，所有需要校验身份的api都会被校验token若token解析后的数据包含用户信息，则身份验证通过
+</code></pre></li></ul> <h5 id="seesion与token校验中-token的优点："><a href="#seesion与token校验中-token的优点：" aria-hidden="true" class="header-anchor">#</a> Seesion与token校验中 token的优点：</h5> <ul><li>在基于token的认证，token通过请求头传输，而不是把认证信息存储在session或者cookie中。这意味着无状态。你可以从任意一种可以发送HTTP请求的终端向服务器发送请求。</li> <li>可以避免CSRF攻击</li> <li>当在应用中进行 session的读，写或者删除操作时，会有一个文件操作发生在操作系统的temp 文件夹下，至少在第一次时。假设有多台服务器并且 session 在第一台服务上创建。当你再次发送请求并且这个请求落在另一台服务器上，session 信息并不存在并且会获得一个“未认证”的响应。我知道，你可以通过一个粘性 session 解决这个问题。然而，在基于 token 的认证中，这个问题很自然就被解决了。没有粘性 session 的问题，因为在每个发送到服务器的请求中这个请求的 token 都会被拦截。</li></ul> <p>有人疑惑的上面不是说jwt校验嘛，怎么没提到jwt 是啥？ 这里就进行补充一下jwt的专业描述：</p> <blockquote><p>JWT(JSON Web Token),字面意思很好理解，就是Web的JSON令牌。一种通过Web可以安全传递JSON格式信息的机制。优势体量小，防串改，数据相对安全。可以用于客户端到服务器端重要用户数据保持，验证用户签名数据，也可以用于无状态服务的状态保持。，而我们项目要做的事情，就是用户登录后把用户当前操作的企业关系，以及用户id存储起来。通过网关将JWT解密后，有相关业务权限的API调用都是使用JWT中传递过来的参数进行权限校验。也可以<a href="https://jwt.io/" target="_blank" rel="noopener noreferrer">参考JWT简介或者官方网站jwt.io<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote> <blockquote><p><a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener noreferrer">JWT 介绍：阮一峰<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote> <blockquote><p>点提示：<a href="https://www.jianshu.com/p/310d307e44c6" target="_blank" rel="noopener noreferrer">token<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>/<a href="https://www.jianshu.com/p/310d307e44c6" target="_blank" rel="noopener noreferrer">seesion<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>/<a href="https://www.jianshu.com/p/310d307e44c6" target="_blank" rel="noopener noreferrer">cookie<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>/<a href="https://blog.csdn.net/qq_35585701/article/details/81393361" target="_blank" rel="noopener noreferrer">localstorage<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <a href="https://github.com/shieldfy/API-Security-Checklist/blob/master/README-zh.md" target="_blank" rel="noopener noreferrer">开发安全的 API 所需要核对的清单<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>
+示例简介：</p></blockquote> <h4 id="登录认证接口认证："><a href="#登录认证接口认证：" aria-hidden="true" class="header-anchor">#</a> 登录认证接口认证：</h4> <p><strong>客户端：</strong></p> <p><strong>在config&gt;index.js配置proxyTable</strong></p> <div class="language-js line-numbers-mode"><pre class="language-js"><code>proxyTable<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<span class="token string">'/api'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token comment">// '/api':匹配项</span>
+    target<span class="token punctuation">:</span> <span class="token string">'http://127.0.0.1:3000/'</span><span class="token punctuation">,</span><span class="token comment">//设置你调用的接口域名和端口号 别忘了加http</span>
+    changeOrigin<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    pathRewrite<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">'^/api'</span><span class="token punctuation">:</span> <span class="token string">''</span><span class="token comment">//这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://127.0.0.1:3000/user/add'，直接写‘/api/user/add’即可</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><strong>使用axios进行登录以及验证拦截:拦截器</strong></p> <blockquote><p>http.js来配置axios拦截器，统一处理所有http请求和响应，就得用上 axios 的拦截器。通过配置http resquest interceptors为http头增加Authorization字段，其内容为Token，通过配置http response interceptors，当后端接口返回401 Unauthorized（未授权），让用户重新登录。</p></blockquote> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+
+<span class="token keyword">const</span> http <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// timeout:10000,</span>
+  <span class="token comment">// baseURL: '',</span>
+  <span class="token comment">// method: 'post'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">// http request 拦截器</span>
+<span class="token comment">// 每次请求都为http头增加Authorization字段，其内容为Token</span>
+http<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  config <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> token <span class="token operator">=</span> localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'token'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>token<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      config<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>common<span class="token punctuation">[</span><span class="token string">'Authorization'</span><span class="token punctuation">]</span> <span class="token operator">=</span> token<span class="token punctuation">;</span>
+      <span class="token comment">// config.headers['token'] = token</span>
+    <span class="token punctuation">}</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> config<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  error <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// http response 拦截器</span>
+http<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>response <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> data <span class="token operator">=</span> response<span class="token punctuation">.</span>data
+  <span class="token comment">//返回状态值是200 即返回数据</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> data<span class="token punctuation">.</span>data
+  <span class="token punctuation">}</span>
+  <span class="token comment">//返回状态值401即跳转到登录页面</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">401</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href <span class="token operator">=</span> <span class="token string">'/login'</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// let msg = data.code ? data.msg : `${response.config.headers['method']} : ${data.error}`</span>
+  <span class="token comment">// data.message = msg</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> error <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// if (error.response) {</span>
+  <span class="token comment">//   switch (error.response.status) {</span>
+  <span class="token comment">//     case 401:</span>
+  <span class="token comment">//       // 这里写清除token的代码</span>
+  <span class="token comment">//       localStorage.removeItem(token);</span>
+  <span class="token comment">//       router.replace({</span>
+  <span class="token comment">//         path: 'login',</span>
+  <span class="token comment">//         query: {redirect: router.currentRoute.fullPath}//登录成功后跳入浏览的当前页面</span>
+  <span class="token comment">//       })</span>
+  <span class="token comment">//   }</span>
+  <span class="token comment">// }</span>
+  <span class="token comment">// return Promise.reject(error.response.data)</span>
+  <span class="token comment">// if (error.code === 'ECONNABORTED' &amp;&amp; error.message.indexOf('timeout') !== -1) {</span>
+  <span class="token comment">//   error.msg = '请求超时，请重试'</span>
+  <span class="token comment">// }</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> http
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br></div></div><p><strong>login.vue登录页面的设计：通过axios 发送账户/密码并接受返回数据token</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;script&gt;
+export default {
+  name: 'login',
+  data () {
+    return {
+        loginForm: {
+          name: &quot;liu&quot;,
+          password: '1234'
+        },
+    }
+  },
+  methods:{
+    login(){
+      this.$http.post('/api/login', this.loginForm).then(res =&gt; {
+          localStorage.setItem('token', res)
+          location.replace('/index')
+           console.log(res);
+           
+      })
+      
+      
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p><strong>服务端：</strong></p> <p><strong>在api.js中进行api校验</strong>
+在数据库中查找用户的信息，如果找到说明用户存在 根据用户的数量来判断判断是否存在即可
+数据检索成功，将用户信息加密为token
+将token返回</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>Router<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'express'</span>
+<span class="token keyword">import</span> jwt <span class="token keyword">from</span> <span class="token string">'jsonwebtoken'</span>
+<span class="token keyword">import</span> retoken <span class="token keyword">from</span> <span class="token string">'./retoken'</span>
+<span class="token keyword">import</span> indexController <span class="token keyword">from</span> <span class="token string">'../controllers'</span>
+
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//设置跨域</span>
+router<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token string">'*'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Origin&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;*&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Headers&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Content-Type,Content-Length, Authorization, Accept,X-Requested-With&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Allow-Methods&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;PUT,POST,GET,DELETE,OPTIONS&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">&quot;Access-Control-Request-Headers:content-type,xfilecategory,xfilename,xfilesize&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">&quot;X-Powered-By&quot;</span><span class="token punctuation">,</span><span class="token string">' 3.2.1'</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>method<span class="token operator">==</span><span class="token string">&quot;OPTIONS&quot;</span><span class="token punctuation">)</span> res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/*让options请求快速返回*/</span>
+  <span class="token keyword">else</span>  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//添加token认证</span>
+router<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>retoken<span class="token punctuation">)</span>
+
+<span class="token comment">/**
+ * 登录验证:
+ * *首先获取提交的用户名和密码
+ * *查询数据库是否存在账户名 存在则生成token
+ * *
+ * */</span>
+router<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'进入登录验证模块'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//登录验证获取前端传来的用户表单用户名和密码参数</span>
+  <span class="token keyword">let</span> username <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>username <span class="token punctuation">;</span>
+  <span class="token keyword">let</span> password <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>password <span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>username<span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  
+
+  <span class="token comment">//在数据库中查找用户的信息，如果找到说明用户存在 根据用户的数量来判断判断是否存在即可</span>
+  <span class="token comment">//使用数据库查询  User.count({'username': username ,'password':password})</span>
+  <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>count <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//生成秘钥</span>
+      <span class="token keyword">var</span> jwtTokenSecret <span class="token operator">=</span> <span class="token string">'fjJWT'</span> <span class="token punctuation">;</span>
+      <span class="token comment">//生成token  </span>
+      <span class="token keyword">const</span> userToken <span class="token operator">=</span> <span class="token punctuation">{</span>
+        username<span class="token punctuation">,</span>
+        password<span class="token punctuation">,</span>
+        loginAt<span class="token punctuation">:</span> <span class="token operator">+</span><span class="token keyword">new</span> <span class="token class-name">Date</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">//签发token 指定过期时间2h</span>
+      <span class="token keyword">const</span> token <span class="token operator">=</span> jwt<span class="token punctuation">.</span><span class="token function">sign</span><span class="token punctuation">(</span>userToken<span class="token punctuation">,</span> jwtTokenSecret<span class="token punctuation">,</span> <span class="token punctuation">{</span> expiresIn<span class="token punctuation">:</span> <span class="token string">'2h'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+        data<span class="token punctuation">:</span> token
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+router<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/index'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+        data<span class="token punctuation">:</span> <span class="token string">'henhao'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//路由</span>
+router<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/user'</span><span class="token punctuation">,</span>indexController<span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> router
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br></div></div><p><strong>retoken.js token认证</strong></p> <div class="language-js line-numbers-mode"><pre class="language-js"><code>mport jwt <span class="token keyword">from</span> <span class="token string">&quot;jsonwebtoken&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> api <span class="token keyword">from</span> <span class="token string">&quot;./unLogin&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> unLogin <span class="token operator">=</span> api<span class="token punctuation">.</span>unLogin
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> method <span class="token operator">=</span> req<span class="token punctuation">.</span>method<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">let</span> path <span class="token operator">=</span> req<span class="token punctuation">.</span>path
+    <span class="token comment">//接口不需要登陆：直接next</span>
+    <span class="token comment">//判断method类型，并且是否包含path</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>unLogin<span class="token punctuation">[</span>method<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> unLogin<span class="token punctuation">[</span>method<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'这个api 不需要验证token的'</span><span class="token punctuation">)</span>
+      <span class="token keyword">return</span>  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> token <span class="token operator">=</span> req<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>authorization
+    <span class="token comment">// console.log(req.headers)</span>
+  <span class="token comment">//没有token值，返回401</span>
+  <span class="token comment">//秘钥</span>
+  <span class="token keyword">var</span> jwtTokenSecret <span class="token operator">=</span> <span class="token string">'fjJWT'</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>token<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            code<span class="token punctuation">:</span> <span class="token number">401</span><span class="token punctuation">,</span>
+            msg<span class="token punctuation">:</span> <span class="token string">'you need login:there is no token'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 解析token是否过期 和是否是正确的token
+     */</span>
+    jwt<span class="token punctuation">.</span><span class="token function">verify</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span> jwtTokenSecret<span class="token punctuation">,</span> <span class="token punctuation">(</span>err<span class="token punctuation">,</span> decoded<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'已验证token 是正确的'</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                code<span class="token punctuation">:</span> <span class="token number">401</span><span class="token punctuation">,</span>
+                msg<span class="token punctuation">:</span> err<span class="token punctuation">.</span>msg
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token comment">// 将携带的信息赋给req.user</span>
+            req<span class="token punctuation">.</span>user <span class="token operator">=</span> decoded
+            <span class="token keyword">return</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br></div></div></div></div> <div class="d-page-right"><img src="/assets/img/home-logo.dbc9eeba.png" class="home_img"> <div class="my_name"><h2>暖男小冰</h2> <span class="label">前端小码农</span></div> <div class="classification"><a href="../../fe/index.html"><span>随记:40</span></a> <a href="../../fe/class.html"><span>分类:15</span></a> <a href="../../fe/Lable/index.html"><span>标签:15</span></a></div></div></div> <div class="d-footer"><div><span> 站点总访客数：1981  站点总访问量：3402</span></div> <span> Copyright © 2018 <a href="https://github.com/Moocliu">暖男小冰</a></span></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/24.7917307d.js" defer></script><script src="/assets/js/app.893cec24.js" defer></script>
+  </body>
+</html>
